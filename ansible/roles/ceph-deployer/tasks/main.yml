@@ -1,0 +1,20 @@
+---
+# Preparing to deploy Ceph for deployer
+
+- name: Install hosts
+  template: src=hosts.j2 dest=/etc/hosts
+
+- name: Install private-key for ceph deploy
+  copy: src=ceph_id_rsa dest=/home/vagrant/.ssh/ceph_id_rsa owner=vagrant group=vagrant mode=0600
+
+- name: Install ssh/config
+  copy: src=config dest=/home/vagrant/.ssh/config owner=vagrant group=vagrant mode=0600
+
+- name: Install ceph-deploy
+  apt: name=ceph-deploy
+
+- name: Install ceph-common
+  apt: name=ceph-common
+
+- name: Install ceph install script
+  template: src=setup-ceph.sh.j2 dest=/home/vagrant/setup-ceph.sh owner=vagrant group=vagrant mode=0700

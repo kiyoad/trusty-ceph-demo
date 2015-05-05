@@ -1,0 +1,18 @@
+---
+# Preparing to deploy Ceph
+
+- name: Add ceph user
+  user: name=ceph shell=/bin/bash groups=sudo append=yes generate_ssh_key=yes
+
+- name: Set non-password sudo
+  shell: |
+    echo "ceph ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/ceph
+    chmod 0440 /etc/sudoers.d/ceph
+  args:
+    creates: /etc/sudoers.d/ceph
+
+- name: Create authorized_keys
+  copy: src=ceph_id_rsa.pub dest=/home/ceph/.ssh/authorized_keys owner=ceph group=ceph mode=0644
+
+- name: Create ceph directory
+  file: path=/var/opt/osd state=directory owner=root group=root mode=0755

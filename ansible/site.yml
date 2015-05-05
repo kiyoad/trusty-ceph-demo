@@ -1,0 +1,5 @@
+---
+# Deploy Ceph
+
+- include: ceph.yml
+- include: deployer.yml

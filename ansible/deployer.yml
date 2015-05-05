@@ -1,0 +1,8 @@
+---
+# Ceph deployer
+
+- hosts: deployer
+  roles:
+    - common
+    - ceph-deployer
+  sudo: yes
