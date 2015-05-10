@@ -1,6 +1,5 @@
 127.0.0.1       localhost
 
-{{ ceph_deployer_ip }}       deployer.local deployer
-{{ ceph_mon_osd_server1_ip }}       sv1.local sv1
-{{ ceph_mon_osd_server2_ip }}       sv2.local sv2
-{{ ceph_mon_osd_server3_ip }}       sv3.local sv3
+{% for item in ceph_mon_osd_servers %}
+{{ item.ip }}  {{ item.name }}
+{% endfor %}
